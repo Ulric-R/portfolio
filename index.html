@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Ulric Randrianiaina</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">Ulric <span>Randrianiaina</span></div>
+    <button id="navToggle" class="nav-toggle">☰</button>
+    <nav id="mainNav">
+      <a href="#about">À propos</a>
+      <a href="#projects">Projets</a>
+      <a href="#skills">Compétences</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/Ulric-R" target="_blank">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero section reveal">
+      <div>
+        <p class="eyebrow">Étudiant L3 SIO</p>
+        <h1>Développeur <span>Web & Mobile</span></h1>
+        <p class="hero-text">Passionné par la conception d’applications, les bases de données et les technologies modernes, 
+      je développe des solutions web et mobiles adaptées aux besoins réels. 
+      Curieux, rigoureux, créatif et toujours motivé pour relever de nouveaux défis, j’aime transformer des idées en projets concrets et accessibles.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn primary">Voir mes projets</a>
+          <a href="#contact" class="btn secondary">Me contacter</a>
+        </div>
+        <div class="availability"><span></span> Disponible dès décembre 2026</div>
+      </div>
+      <div class="hero-card reveal delay-1">
+        <div class="terminal-top"><span></span><span></span><span></span><code>ulric@portfolio:~</code></div>
+        <div class="terminal-body">
+          <p><span class="prompt">$</span> whoami</p>
+          <p class="code-output">Randrianiaina Ulric</p>
+          <p><span class="prompt">$</span> focus</p>
+          <p class="code-output">Génie Logiciel / Web / Data</p>
+          <p><span class="prompt">$</span> stack</p>
+          <p class="code-output">PHP · Java · Python · React · SQL ...</p>
+          <p><span class="prompt">$</span> status(1)</p>
+          <p class="code-output success">SIO Student</p>
+          <p><span class="prompt">$</span> status(2)</p>
+          <p class="code-output success">ready_to_build()</p>
+          <span class="cursor">▌</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- À propos -->
+    <section id="about" class="section reveal split">
+      <div class="section-heading">
+        <h2><span>À propos</span></h2>
+        <p>Étudiant en Licence 3 Service Informatique aux Organisations (Génie Logiciel) à l’ESMIA Innovation. Rigoureux, curieux et passionné par la conception d’applications.</p>
+      </div>
+    </section>
+
+    <!-- Projets -->
+    <section id="projects" class="section reveal">
+      <div class="section-heading centered">
+        <h2><span>Projets</span></h2>
+        <p>Quelques réalisations académiques et personnelles</p>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card"><span class="tag">React / Python</span><h3>Coopératives de transport</h3><p>React, React Native, Python, PostgreSQL</p></div>
+        <div class="project-card"><span class="tag">PHP / MySQL</span><h3>Site de vote étudiant</h3><p>PHP, MySQL, HTML/CSS, JavaScript</p></div>
+        <div class="project-card"><span class="tag">Hackathon</span><h3>Système médical de gestion du stress</h3><p>Python, React</p></div>
+        <div class="project-card"><span class="tag">Java / JSP</span><h3>Gestion de parking</h3><p>Réservation, prise de parking, paiement simulé</p></div>
+        <div class="project-card"><span class="tag">Java / JSP</span><h3>Gestion textile</h3><p>Commande, file, expédition</p></div>
+        <div class="project-card"><span class="tag">Nginx / React</span><h3>Réservation d’hôtel</h3><p>Nginx, Python, React</p></div>
+        <div class="project-card"><span class="tag">React</span><h3>Portfolio personnel</h3><p>React, CSS, GitHub Pages</p></div>
+        <div class="project-card"><span class="tag">React / Firebase</span><h3>Mini boutique e-commerce</h3><p>React, Firebase, Stripe mock</p></div>
+        <div class="project-card"><span class="tag">Python</span><h3>Chatbot support</h3><p>Python, front-end</p></div>
+      </div>
+      <div class="projects-actions">
+        <button type="button" class="btn secondary" id="projectsToggle" aria-expanded="false">Voir tous les projets</button>
+      </div>
+    </section>
+
+    <!-- Compétences -->
+    <section id="skills" class="section reveal skills-section">
+      <div class="section-heading">
+        <h2><span>Compétences</span></h2>
+        <p>Langages, frameworks, bases de données et outils</p>
+      </div>
+      <div class="skills-layout">
+        <div class="skill-panel">
+          <h3>Langages</h3>
+          <div class="skill-row"><span>JavaScript, Python, PHP, Java, SQL</span></div>
+        </div>
+        <div class="skill-panel">
+          <h3>Frameworks</h3>
+          <div class="skill-row"><span>React, React Native, SpringBoot (en cours)</span></div>
+        </div>
+        <div class="skill-panel">
+          <h3>Bases de données</h3>
+          <div class="skill-row"><span>MySQL, PostgreSQL</span></div>
+        </div>
+        <div class="skill-panel">
+          <h3>Outils</h3>
+          <div class="skill-row"><span>Git/GitHub, Docker, VS Code, Eclipse</span></div>
+        </div>
+        <div class="skill-panel"><h4>Soft skills</h4><div class="skill-row"><span>Autonomie</span><span>Esprit d'analyse</span><span>Résolution de problèmes</span><span>Adaptabilité</span><span>Communication</span></div></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section reveal contact-section">
+      <div class="section-heading">
+        <h2><span>Contact</span></h2>
+        <p>Envoyez-moi un message ou retrouvez-moi sur LinkedIn</p>
+      </div>
+      <div class="contact-details">
+        <p>Email : <a href="mailto:ulricrandrianiaina@gmail.com">ulricrandrianiaina@gmail.com</a></p>
+        <p>LinkedIn : <a href="https://linkedin.com/in/ulric_randrianiaina" target="_blank">linkedin.com/in/ulric_randrianiaina</a></p>
+        <p>GitHub : <a href="https://github.com/Ulric-R" target="_blank">Ulric-R</a></p>
+      </div>
+      <form id="contactForm" class="contact-form">
+        <label>Nom<input type="text" name="name" required></label>
+        <label>Email<input type="email" name="email" required></label>
+        <label>Message<textarea name="message" rows="4" required></textarea></label>
+        <button type="submit" class="btn primary">Envoyer</button>
+        <p class="form-note">Les messages sont enregistrés localement en JSON.</p>
+      </form>
+      
+    </section>
+
+    <section id="extras" class="section extras">
+      <div class="extra-card reveal"><p class="eyebrow"><H4>Langues</H4></p><h3>Communication</h3><p><b>Malagasy</b> — Native<br><b>Français</b> — B2 (DELF)<br><b>Anglais</b> — Intermédiaire<br><b>Espagnol</b> — Débutant</p></div>
+      <div class="extra-card reveal delay-1"><p class="eyebrow">Mini-lab</p><h3>Pierre · Feuille · Ciseaux</h3><p>Une petite zone interactive pour rappeler que coder, c'est aussi expérimenter.</p><button class="btn primary" id="gameStart">Lancer une partie</button></div>
+    </section>
+
+    <section id="game" class="section game-section hidden">
+      <div class="game-card reveal">
+        <div><p class="eyebrow">Mini-jeu</p><h2>3 manches. Que le meilleur gagne.</h2></div>
+        <div class="game-score"><span id="playerScore">0</span><small>:</small><span id="computerScore">0</span></div>
+        <div class="choices">
+          <button data-choice="rock">✊<span>Pierre</span></button>
+          <button data-choice="paper">✋<span>Feuille</span></button>
+          <button data-choice="scissors">✌️<span>Ciseaux</span></button>
+        </div>
+        <p id="gameMessage">Choisis ton coup.</p>
+        <button class="btn secondary" id="gameReset">Recommencer</button>
+        <button class="btn secondary" id="gameClose">Fermer</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Ulric Randrianiaina</p>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
