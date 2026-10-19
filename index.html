@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="particles"></div>
+  <div class="bg-grid"></div>
   <header class="site-header">
     <div class="brand">Ulric <span>Randrianiaina</span></div>
     <button id="navToggle" class="nav-toggle">☰</button>
@@ -96,17 +98,17 @@
         </div>
         <div class="skill-panel">
           <h3>Frameworks</h3>
-          <div class="skill-row"><span>React, React Native, SpringBoot (en cours)</span></div>
+          <div class="skill-row"><span>React, React Native, SpringBoot, Laravel, Django </span></div>
         </div>
         <div class="skill-panel">
           <h3>Bases de données</h3>
-          <div class="skill-row"><span>MySQL, PostgreSQL</span></div>
+          <div class="skill-row"><span>MySQL, PostgreSQL, SQLite</span></div>
         </div>
         <div class="skill-panel">
           <h3>Outils</h3>
-          <div class="skill-row"><span>Git/GitHub, Docker, VS Code, Eclipse</span></div>
+          <div class="skill-row"><span>Git/GitHub, Docker, VS Code, Eclipse, Android Studio</span></div>
         </div>
-        <div class="skill-panel"><h4>Soft skills</h4><div class="skill-row"><span>Autonomie</span><span>Esprit d'analyse</span><span>Résolution de problèmes</span><span>Adaptabilité</span><span>Communication</span></div></div>
+        <div class="skill-panel"><h4>Soft skills</h4><div class="skill-row"><span>Autonomie</span><span>Esprit d'analyse</span><span>Résolution de problèmes</span><span>Adaptabilité</span><span>Communication</span><span>Calme</span><span>Travail en équipe</span><span>Patience</span></div></div>
         </div>
 
       </div>
@@ -123,14 +125,13 @@
         <p>LinkedIn : <a href="https://linkedin.com/in/ulric_randrianiaina" target="_blank">linkedin.com/in/ulric_randrianiaina</a></p>
         <p>GitHub : <a href="https://github.com/Ulric-R" target="_blank">Ulric-R</a></p>
       </div>
-      <form id="contactForm" class="contact-form">
-        <label>Nom<input type="text" name="name" required></label>
-        <label>Email<input type="email" name="email" required></label>
-        <label>Message<textarea name="message" rows="4" required></textarea></label>
-        <button type="submit" class="btn primary">Envoyer</button>
-        <p class="form-note">Les messages sont enregistrés localement en JSON.</p>
+      <form id="contactForm" class="contact-form" novalidate>
+        <label>Nom<input type="text" name="name" placeholder="Votre nom" required></label>
+        <label>Email<input type="email" name="email" placeholder="votre@email.com" required></label>
+        <label>Message<textarea name="message" rows="4" placeholder="Décrivez votre projet ou votre message..." required></textarea></label>
+        <button id="submitBtn" type="submit" class="btn primary">Envoyer</button>
+        <p id="formStatus" class="form-status" aria-live="polite"></p>
       </form>
-      
     </section>
 
     <section id="extras" class="section extras">
