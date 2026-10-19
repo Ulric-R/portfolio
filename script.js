@@ -146,6 +146,52 @@ const formStatus = $('#formStatus');
 const submitBtn = $('#submitBtn');
 const contactForm = $('#contactForm');
 
+const setFormMessage = (message, type = 'info') => {
+  if (!formStatus) return;
+  formStatus.textContent = message;
+  formStatus.classList.remove('error', 'success');
+  if (type === 'error') {
+    formStatus.classList.add('error');
+  }
+  if (type === 'success') {
+    formStatus.classList.add('success');
+  }
+};
+
+const resetFieldStates = () => {
+  if (!contactForm) return;
+  contactForm.querySelectorAll('input, textarea').forEach(field => {
+    field.classList.remove('invalid');
+    field.setAttribute('aria-invalid', 'false');
+  });
+};
+
+const validatePayload = (payload) => {
+  if (!payload.name || payload.name.length < 4) {
+    return 'Le nom doit contenir au moins 4 caractères.';
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(payload.email)) {
+    return 'L’adresse email est invalide.';
+  }
+
+  if (!payload.message || payload.message.length < 20) {
+    return 'Le message doit contenir au moins 20 caractères.';
+  }
+
+  return '';
+};
+
+const markFieldError = (fieldName) => {
+  if (!contactForm) return;
+  const field = contactForm.querySelector(`[name="${fieldName}"]`);
+  if (!field) return;
+  field.classList.add('invalid');
+  field.setAttribute('aria-invalid', 'true');
+  field.focus();
+};
+
 const setSubmitState = (isLoading) => {
   if (!submitBtn) return;
   submitBtn.disabled = isLoading;
@@ -153,7 +199,7 @@ const setSubmitState = (isLoading) => {
 };
 
 const sendContactMessage = async (payload) => {
-  const response = await fetch('http://localhost:5000/api/contact', {
+  const response = await fetch(`https://formsubmit.co/ajax/${emailAddress}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -163,24 +209,27 @@ const sendContactMessage = async (payload) => {
       name: payload.name,
       email: payload.email,
       message: payload.message,
-      date: payload.date
+      date: payload.date,
+      _subject: `Nouveau message depuis le portfolio : ${payload.name}`,
+      _replyto: payload.email,
+      _template: 'table'
     })
   });
 
-  const data = await response.json().catch(() => ({}));
-
   if (!response.ok) {
-    throw new Error(data.error || 'Erreur lors de l’envoi par email.');
+    const errorText = await response.text().catch(() => '');
+    throw new Error(errorText || 'Erreur lors de l’envoi par email.');
   }
 
-  return data;
+  return response.json();
 };
 
 if (contactForm) {
   contactForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+    const form = contactForm;
+    const formData = new FormData(form);
     const payload = {
       name: String(formData.get('name') || '').trim(),
       email: String(formData.get('email') || '').trim(),
@@ -188,33 +237,43 @@ if (contactForm) {
       date: new Date().toISOString()
     };
 
-    if (!payload.name || !payload.email || !payload.message) {
-      if (formStatus) {
-        formStatus.textContent = 'Veuillez remplir tous les champs.';
+    resetFieldStates();
+    const validationError = validatePayload(payload);
+    if (validationError) {
+      setFormMessage(validationError, 'error');
+      showToast(validationError);
+
+      if (!payload.name || payload.name.length < 2) {
+        markFieldError('name');
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+        markFieldError('email');
+      } else {
+        markFieldError('message');
       }
-      showToast('Veuillez compléter tous les champs.');
       return;
     }
 
+    const immediateStatus = 'Message envoyé !';
     setSubmitState(true);
-    if (formStatus) {
-      formStatus.textContent = 'Envoi en cours...';
-    }
+    setFormMessage(immediateStatus, 'success');
+    showToast(immediateStatus);
+    if (form) form.reset();
 
     try {
       await sendContactMessage(payload);
       localStorage.setItem('ulric_message_backup', JSON.stringify(payload));
-      event.currentTarget.reset();
-      if (formStatus) {
-        formStatus.textContent = 'Message envoyé avec succès !';
-      }
-      showToast('Message envoyé avec succès.');
     } catch (error) {
       localStorage.setItem('ulric_message_backup', JSON.stringify(payload));
-      if (formStatus) {
-        formStatus.textContent = error.message || 'Une erreur est survenue.';
-      }
-      showToast(error.message || 'Une erreur est survenue.');
+      const subject = encodeURIComponent(`Nouveau message de ${payload.name}`);
+      const body = encodeURIComponent(
+        `Nom : ${payload.name}\nEmail : ${payload.email}\n\nMessage :\n${payload.message}\n\nEnvoyé le : ${new Date(payload.date).toLocaleString('fr-FR')}`
+      );
+
+      setFormMessage('Le client email a été ouvert pour finaliser l’envoi.', 'info');
+      showToast('Votre messagerie a été ouverte pour finaliser l’envoi.');
+      setTimeout(() => {
+        window.location.href = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+      }, 200);
     } finally {
       setSubmitState(false);
     }
